@@ -1,8 +1,10 @@
 package com.scut.server.dao;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
-public class Courser {
+public class StudentCourser {
 
     private String courser_no;
     private String courser_name;
@@ -10,17 +12,9 @@ public class Courser {
     private Date courser_begin_date;
     private Date courser_end_date;
     private int courser_status;
-    private String courser_teacher_openid;
+    private String student_openid;
 
-    public String getCourser_teacher_openid() {
-        return courser_teacher_openid;
-    }
-
-    public void setCourser_teacher_openid(String courser_teacher_openid) {
-        this.courser_teacher_openid = courser_teacher_openid;
-    }
-
-    public Courser() {
+    public StudentCourser() {
     }
 
     public String getCourser_no() {
@@ -71,15 +65,17 @@ public class Courser {
         this.courser_status = courser_status;
     }
 
-    @Override
-    public String toString() {
-        return "Courser{" +
-                "courser_no='" + courser_no + '\'' +
-                ", courser_name='" + courser_name + '\'' +
-                ", courser_description='" + courser_description + '\'' +
-                ", courser_begin_date=" + courser_begin_date +
-                ", courser_end_date=" + courser_end_date +
-                ", courser_status=" + courser_status +
-                '}';
+    @JsonProperty(value="is_selected")
+    public int getStudent_openid() {
+        System.out.println(student_openid);
+        if(student_openid != null){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    public void setStudent_openid(String student_openid) {
+        this.student_openid = student_openid;
     }
 }

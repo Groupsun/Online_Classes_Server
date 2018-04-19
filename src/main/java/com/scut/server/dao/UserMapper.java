@@ -14,4 +14,7 @@ public interface UserMapper {
 
     @Insert("INSERT INTO user VALUES (#{user.user_openid},#{user.user_id},#{user.user_birthday},#{user.user_sex},#{user.user_name},#{user.user_role})")
     void insertUser(@Param("user") User user);
+
+    @Select("select * from user where user_openid = #{openid}")
+    User selectUserByOpenid(@Param("openid") String openid);
 }

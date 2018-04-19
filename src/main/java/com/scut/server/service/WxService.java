@@ -22,6 +22,10 @@ public class WxService {
     private UserMapper userMapper;
 
 
+    public User getUserByopenId(String openid){
+        return userMapper.selectUserByOpenid(openid);
+    }
+
     public boolean isNeedRegister(String openid){
         if(userMapper.isReisgered(openid) == 1){
             return true;

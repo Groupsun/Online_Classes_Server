@@ -6,10 +6,7 @@ import com.scut.server.util.JsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +36,13 @@ public class WxController {
     public void register(User user){
         wxService.registerUser(user);
     }
+
+
+    @GetMapping("/user/{openid}")
+    public User getUserByOpenid(@PathVariable("openid")String openid){
+        return wxService.getUserByopenId(openid);
+    }
+
 
 
 
