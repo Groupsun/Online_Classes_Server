@@ -2,9 +2,11 @@ package com.scut.server.service;
 
 import com.scut.server.dao.Courser;
 import com.scut.server.dao.CourserMapper;
-import com.scut.server.dao.StudentCourser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import java.text.ParsePosition;
 
 import java.util.List;
 
@@ -14,25 +16,37 @@ public class CourserService {
     @Autowired
     private CourserMapper courserMapper;
 
-    public List<StudentCourser> getAllCouser(String openid){
-        return courserMapper.selectStudentCourser(openid);
+    public List<Courser> getAllCourser(){
+        return courserMapper.getAllCourser();
     }
 
-    public Courser getCourserById(String id){
+    public Courser getCourserById(int id){
         return courserMapper.getCourserById(id);
     }
 
-    public boolean selectCourser(String openid, String courserId){
-        if(courserMapper.insertStudentCourser(courserId, openid) >= 1){
-            return true;
-        } else {
-            return false;
+
+    public void createCourser(Courser courser){
+        Date currentDate = new Date();
+        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(currentDate);
+        ParsePosition pos = new ParsePosition(8);
+        Date currentTime = formatter.parse(dateString, pos);*/
+
+        if(courser.getCourser_begin_date().compareTo(currentDate)<=0){
+            courser.setCourser_status(1);
         }
+        else{
+            courser.setCourser_status(0);
+        }
+        //System.out.println("comp="+tmp);
+        courserMapper.insertCourser(courser);
     }
 
-
-    public void deleteSelectedCourser(String openid, String courserId){
-       courserMapper.deleteSelectedCourser(openid, courserId);
+    public boolean deleteCourser(int courser_id,String tea_openid){
+        String courser_teaId=getCourserById(courser_id).getCourser_teacher_openid();
+        if(courser_teaId.equals("")||!courser_teaId.equals(tea_openid))
+            return false;
+        courserMapper.deleteCourser(courser_id);
+        return true;
     }
-
 }

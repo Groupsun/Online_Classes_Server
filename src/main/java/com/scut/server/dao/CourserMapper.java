@@ -8,10 +8,14 @@ import java.util.List;
 public interface CourserMapper {
 
     @Select("select * from courser")
-    List<Courser> getAllCouser();
+    List<Courser> getAllCourser();
 
     @Select("select * from courser where courser_no = #{id}")
-    Courser getCourserById(@Param("id") String id);
+    Courser getCourserById(@Param("id") int id);
+
+    //@Options(useGeneratedKeys = true,keyProperty = "courser_no",keyColumn = "courser_no")
+    @Insert("INSERT INTO courser VALUES (null,#{courser.courser_name},#{courser.courser_description},#{courser.courser_begin_date},#{courser.courser_end_date},#{courser.courser_status},#{courser.courser_teacher_openid})")
+    void insertCourser(@Param("courser") Courser courser);
 
 
     @Insert("REPLACE INTO student_courser VALUES (#{openid},#{courser_id})")
@@ -26,4 +30,6 @@ public interface CourserMapper {
     @Delete("DELETE FROM student_courser WHERE student_openid = #{openid} AND courser_id = #{courser_id}")
     void deleteSelectedCourser(@Param("openid") String openid, @Param("courser_id") String courser_id);
 
+    @Delete("DELETE FROM courser WHERE courser_no = #{courser_id}")
+    void deleteCourser(@Param("courser_id") int courser_id);
 }

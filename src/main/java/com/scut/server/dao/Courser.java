@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Courser {
 
-    private String courser_no;
+    private int courser_no;
     private String courser_name;
     private String courser_description;
     private Date courser_begin_date;
@@ -23,11 +23,11 @@ public class Courser {
     public Courser() {
     }
 
-    public String getCourser_no() {
+    public int getCourser_no() {
         return courser_no;
     }
 
-    public void setCourser_no(String courser_no) {
+    public void setCourser_no(int courser_no) {
         this.courser_no = courser_no;
     }
 
@@ -70,6 +70,8 @@ public class Courser {
     public void setCourser_status(int courser_status) {
         this.courser_status = courser_status;
     }
+
+
 
     @Override
     public String toString() {

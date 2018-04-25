@@ -3,8 +3,12 @@ package com.scut.server.controller;
 import com.scut.server.dao.User;
 import com.scut.server.service.WxService;
 import com.scut.server.util.JsonHelper;
+import org.apache.catalina.connector.Connector;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,3 +58,5 @@ public class WxController {
     }
 
 }
+
+
