@@ -45,8 +45,27 @@ public class CourserService {
     public boolean deleteCourser(int courser_id,String tea_openid){
         String courser_teaId=getCourserById(courser_id).getCourser_teacher_openid();
         if(courser_teaId.equals("")||!courser_teaId.equals(tea_openid))
-            return false;
+            return false;//没有权限删除别人的课程
+        //有权限删除自己的课程
         courserMapper.deleteCourser(courser_id);
+        return true;
+    }
+
+    public boolean updateCourser(String tea_id,Courser courser){
+        String courser_teaId=getCourserById(courser.getCourser_no()).getCourser_teacher_openid();
+
+        if(courser_teaId.equals("")||!courser_teaId.equals(tea_id))
+            return false;//没有权限更改别人的课程
+
+        //有权限更改自己的课程
+        Date currentDate = new Date();
+        if(courser.getCourser_begin_date().compareTo(currentDate)<=0){
+            courser.setCourser_status(1);
+        }
+        else{
+            courser.setCourser_status(0);
+        }
+        courserMapper.updateCourser(courser);
         return true;
     }
 }

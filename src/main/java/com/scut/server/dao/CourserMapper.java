@@ -14,7 +14,15 @@ public interface CourserMapper {
     Courser getCourserById(@Param("id") int id);
 
     //@Options(useGeneratedKeys = true,keyProperty = "courser_no",keyColumn = "courser_no")
-    @Insert("INSERT INTO courser VALUES (null,#{courser.courser_name},#{courser.courser_description},#{courser.courser_begin_date},#{courser.courser_end_date},#{courser.courser_status},#{courser.courser_teacher_openid})")
+    @Insert("INSERT INTO courser VALUES " +
+            "(null," +
+            "#{courser.courser_name}," +
+            "#{courser.courser_description}," +
+            "#{courser.courser_begin_date}," +
+            "#{courser.courser_end_date}," +
+            "#{courser.courser_status}," +
+            "#{courser.courser_teacher_openid}," +
+            "0)")
     void insertCourser(@Param("courser") Courser courser);
 
 
@@ -32,4 +40,13 @@ public interface CourserMapper {
 
     @Delete("DELETE FROM courser WHERE courser_no = #{courser_id}")
     void deleteCourser(@Param("courser_id") int courser_id);
+
+    @Update("UPDATE courser SET " +
+            "courser_name = #{courser.courser_name}," +
+            "courser_description = #{courser.courser_description}," +
+            "courser_begin_date = #{courser.courser_begin_date}," +
+            "courser_end_date = #{courser.courser_end_date}," +
+            "courser_status = #{courser.courser_status} " +
+            "WHERE courser_no = #{courser.courser_no}")
+    void updateCourser(@Param("courser") Courser courser);
 }

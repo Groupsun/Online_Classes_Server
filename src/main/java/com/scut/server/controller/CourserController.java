@@ -48,6 +48,19 @@ public class CourserController {
         }
         return jsonHelper.getResultMap();
     }
+
+    @GetMapping("/courser/update/{tea_id}")
+    public Map<String,Object> updateCourser(@PathVariable String tea_id,Courser courser){
+        JsonHelper jsonHelper = new JsonHelper();
+        if(courserService.updateCourser(tea_id,courser)){
+            jsonHelper.put("result_code",1);
+        }
+        else{
+            jsonHelper.put("result_code",0);
+        }
+        return jsonHelper.getResultMap();
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
